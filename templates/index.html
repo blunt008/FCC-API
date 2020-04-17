@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Timestamp API</h1>
+    <p class="lead">This is a homepage for APIs and Microservices project that you can find on Free Code Camp</p>
+    <hr class="my-4">
+    <h3>API endpoints:</h3>
+    <p>/api/timestamp/[year]-[month]-[day] --> return UNIX Time Stamp && UTC Time as JSON</p>
+    <p>/api/timestamp/[timestamp] --> return UNIX Time Stamp && UTC Time as JSON</p>
+    <p>/api/timestamp/ --> return current UNIX Time Stamp && UTC Time as JSON</p>
+    <a class="btn btn-primary btn-lg" href="https://www.freecodecamp.org/learn/apis-and-microservices/apis-and-microservices-projects/timestamp-microservice" target="_blank" role="button">Project requirements</a>
+  </div>
+{% endblock content %}
