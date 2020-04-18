@@ -26,7 +26,7 @@ def year_month_day(request, year, month, day):
         unix_stamp = t.mktime(date.timetuple())
         return JsonResponse(
             {
-                'unix': unix_stamp,
+                'unix': unix_stamp * 1000,
                 'utc': full_date
             }
         )
