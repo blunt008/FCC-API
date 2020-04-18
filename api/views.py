@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, Http404
 from datetime import datetime, timezone
-import time
+import time as t
+from time import time
 # Create your views here.
 
 # FORMULA now = datetime(2020, 12, 25).strftime('%a, %d %b %Y %H:%M:%S')
@@ -22,7 +23,7 @@ def year_month_day(request, year, month, day):
     try:
         date = datetime(year, month, day, tzinfo=timezone.utc)
         full_date = date.strftime('%a, %d %b %Y %H:%M:%S GMT')
-        unix_stamp = time.mktime(date.timetuple())
+        unix_stamp = t.mktime(date.timetuple())
         return JsonResponse(
             {
                 'unix': unix_stamp,
@@ -36,12 +37,13 @@ def year_month_day(request, year, month, day):
 
 
 def unix_timestamp(request, timestamp):
+    timestamp = timestamp / 1000.0
     try:
         date = datetime.utcfromtimestamp(
             timestamp).strftime('%a, %d %b %Y %H:%M:%S GMT')
         return JsonResponse(
             {
-                'unix': timestamp,
+                'unix': timestamp * 1000,
                 'utc': date
             }
         )
@@ -52,7 +54,7 @@ def unix_timestamp(request, timestamp):
 
 
 def empty_timestamp(request):
-    unix = datetime.now().timestamp()
+    unix = int(time() * 1000)
     date = datetime.now().strftime('%a, %d %b %Y %H:%M:%S GMT')
     return JsonResponse(
         {
