@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # 3rd party 
     'rest_framework',
+    'corsheaders',
 
     # Local
     'api.apps.ApiConfig',
@@ -53,6 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'timestamp_micro.urls'
@@ -127,3 +130,7 @@ STATIC_URL = '/static/'
 
 # Django heroku
 django_heroku.settings(locals())
+
+
+# Cors
+CORS_ORIGIN_ALLOW_ALL = True
