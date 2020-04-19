@@ -12,10 +12,6 @@ from time import time
 # datetime.utcfromtimestamp(t)
 
 
-def handler404(request):
-    return JsonResponse({
-            'error': 'Invalid Date'
-        })
 
 
 def index(request):
@@ -27,7 +23,7 @@ def index(request):
 
 def year_month_day(request, year, month, day):
     try:
-        date = datetime(year, month, day, tzinfo=timezone.utc)
+        date = datetime(int(year), int(month), int(day), tzinfo=timezone.utc)
         full_date = date.strftime('%a, %d %b %Y %H:%M:%S GMT')
         unix_stamp = t.mktime(date.timetuple())
         return JsonResponse(
@@ -43,7 +39,7 @@ def year_month_day(request, year, month, day):
 
 
 def unix_timestamp(request, timestamp):
-    timestamp = timestamp / 1000.0
+    timestamp = int(timestamp) / 1000.0
     try:
         date = datetime.utcfromtimestamp(
             timestamp).strftime('%a, %d %b %Y %H:%M:%S GMT')
@@ -68,3 +64,9 @@ def empty_timestamp(request):
             'utc': date
         }
     )
+
+
+def handler_404(request):
+    return JsonResponse({
+            'error': 'Invalid Date'
+        })
