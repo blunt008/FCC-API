@@ -12,6 +12,12 @@ from time import time
 # datetime.utcfromtimestamp(t)
 
 
+def handler404(request):
+    return JsonResponse({
+            'error': 'Invalid Date'
+        })
+
+
 def index(request):
     return render(
         request,
